@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.JigongbanMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Jigongban" >
+    <id column="BanId" property="banid" jdbcType="INTEGER" />
+    <result column="BanName" property="banname" jdbcType="VARCHAR" />
+    <result column="BuMenId" property="bumenid" jdbcType="INTEGER" />
+    <result column="BaiNei" property="bainei" jdbcType="CHAR" />
+    <result column="BaiWai" property="baiwai" jdbcType="CHAR" />
+    <result column="WanNei" property="wannei" jdbcType="CHAR" />
+    <result column="WanWai" property="wanwai" jdbcType="CHAR" />
+    <result column="BaiZai" property="baizai" jdbcType="CHAR" />
+    <result column="WanZai" property="wanzai" jdbcType="CHAR" />
+    <result column="RanYou" property="ranyou" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BanId, BanName, BuMenId, BaiNei, BaiWai, WanNei, WanWai, BaiZai, WanZai, RanYou
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.JigongbanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jigongban
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from jigongban
+    where BanId = #{banid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jigongban
+    where BanId = #{banid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.JigongbanExample" >
+    delete from jigongban
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Jigongban" >
+    insert into jigongban (BanId, BanName, BuMenId, 
+      BaiNei, BaiWai, WanNei, WanWai, 
+      BaiZai, WanZai, RanYou)
+    values (#{banid,jdbcType=INTEGER}, #{banname,jdbcType=VARCHAR}, #{bumenid,jdbcType=INTEGER}, 
+      #{bainei,jdbcType=CHAR}, #{baiwai,jdbcType=CHAR}, #{wannei,jdbcType=CHAR}, #{wanwai,jdbcType=CHAR}, 
+      #{baizai,jdbcType=CHAR}, #{wanzai,jdbcType=CHAR}, #{ranyou,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Jigongban" >
+    insert into jigongban
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="banid != null" >
+        BanId,
+      </if>
+      <if test="banname != null" >
+        BanName,
+      </if>
+      <if test="bumenid != null" >
+        BuMenId,
+      </if>
+      <if test="bainei != null" >
+        BaiNei,
+      </if>
+      <if test="baiwai != null" >
+        BaiWai,
+      </if>
+      <if test="wannei != null" >
+        WanNei,
+      </if>
+      <if test="wanwai != null" >
+        WanWai,
+      </if>
+      <if test="baizai != null" >
+        BaiZai,
+      </if>
+      <if test="wanzai != null" >
+        WanZai,
+      </if>
+      <if test="ranyou != null" >
+        RanYou,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="banid != null" >
+        #{banid,jdbcType=INTEGER},
+      </if>
+      <if test="banname != null" >
+        #{banname,jdbcType=VARCHAR},
+      </if>
+      <if test="bumenid != null" >
+        #{bumenid,jdbcType=INTEGER},
+      </if>
+      <if test="bainei != null" >
+        #{bainei,jdbcType=CHAR},
+      </if>
+      <if test="baiwai != null" >
+        #{baiwai,jdbcType=CHAR},
+      </if>
+      <if test="wannei != null" >
+        #{wannei,jdbcType=CHAR},
+      </if>
+      <if test="wanwai != null" >
+        #{wanwai,jdbcType=CHAR},
+      </if>
+      <if test="baizai != null" >
+        #{baizai,jdbcType=CHAR},
+      </if>
+      <if test="wanzai != null" >
+        #{wanzai,jdbcType=CHAR},
+      </if>
+      <if test="ranyou != null" >
+        #{ranyou,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.JigongbanExample" resultType="java.lang.Integer" >
+    select count(*) from jigongban
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update jigongban
+    <set >
+      <if test="record.banid != null" >
+        BanId = #{record.banid,jdbcType=INTEGER},
+      </if>
+      <if test="record.banname != null" >
+        BanName = #{record.banname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bumenid != null" >
+        BuMenId = #{record.bumenid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bainei != null" >
+        BaiNei = #{record.bainei,jdbcType=CHAR},
+      </if>
+      <if test="record.baiwai != null" >
+        BaiWai = #{record.baiwai,jdbcType=CHAR},
+      </if>
+      <if test="record.wannei != null" >
+        WanNei = #{record.wannei,jdbcType=CHAR},
+      </if>
+      <if test="record.wanwai != null" >
+        WanWai = #{record.wanwai,jdbcType=CHAR},
+      </if>
+      <if test="record.baizai != null" >
+        BaiZai = #{record.baizai,jdbcType=CHAR},
+      </if>
+      <if test="record.wanzai != null" >
+        WanZai = #{record.wanzai,jdbcType=CHAR},
+      </if>
+      <if test="record.ranyou != null" >
+        RanYou = #{record.ranyou,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update jigongban
+    set BanId = #{record.banid,jdbcType=INTEGER},
+      BanName = #{record.banname,jdbcType=VARCHAR},
+      BuMenId = #{record.bumenid,jdbcType=INTEGER},
+      BaiNei = #{record.bainei,jdbcType=CHAR},
+      BaiWai = #{record.baiwai,jdbcType=CHAR},
+      WanNei = #{record.wannei,jdbcType=CHAR},
+      WanWai = #{record.wanwai,jdbcType=CHAR},
+      BaiZai = #{record.baizai,jdbcType=CHAR},
+      WanZai = #{record.wanzai,jdbcType=CHAR},
+      RanYou = #{record.ranyou,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Jigongban" >
+    update jigongban
+    <set >
+      <if test="banname != null" >
+        BanName = #{banname,jdbcType=VARCHAR},
+      </if>
+      <if test="bumenid != null" >
+        BuMenId = #{bumenid,jdbcType=INTEGER},
+      </if>
+      <if test="bainei != null" >
+        BaiNei = #{bainei,jdbcType=CHAR},
+      </if>
+      <if test="baiwai != null" >
+        BaiWai = #{baiwai,jdbcType=CHAR},
+      </if>
+      <if test="wannei != null" >
+        WanNei = #{wannei,jdbcType=CHAR},
+      </if>
+      <if test="wanwai != null" >
+        WanWai = #{wanwai,jdbcType=CHAR},
+      </if>
+      <if test="baizai != null" >
+        BaiZai = #{baizai,jdbcType=CHAR},
+      </if>
+      <if test="wanzai != null" >
+        WanZai = #{wanzai,jdbcType=CHAR},
+      </if>
+      <if test="ranyou != null" >
+        RanYou = #{ranyou,jdbcType=CHAR},
+      </if>
+    </set>
+    where BanId = #{banid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Jigongban" >
+    update jigongban
+    set BanName = #{banname,jdbcType=VARCHAR},
+      BuMenId = #{bumenid,jdbcType=INTEGER},
+      BaiNei = #{bainei,jdbcType=CHAR},
+      BaiWai = #{baiwai,jdbcType=CHAR},
+      WanNei = #{wannei,jdbcType=CHAR},
+      WanWai = #{wanwai,jdbcType=CHAR},
+      BaiZai = #{baizai,jdbcType=CHAR},
+      WanZai = #{wanzai,jdbcType=CHAR},
+      RanYou = #{ranyou,jdbcType=CHAR}
+    where BanId = #{banid,jdbcType=INTEGER}
+  </update>
+</mapper>

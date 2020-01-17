@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.mapper.HuiyuanMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Huiyuan" >
+    <result column="KeHuNo" property="kehuno" jdbcType="VARCHAR" />
+    <result column="HuiYuanName" property="huiyuanname" jdbcType="VARCHAR" />
+    <result column="HuiYuanNo" property="huiyuanno" jdbcType="VARCHAR" />
+    <result column="HuiYuanMoney" property="huiyuanmoney" jdbcType="DOUBLE" />
+    <result column="RuHuiTime" property="ruhuitime" jdbcType="TIMESTAMP" />
+    <result column="DaoQiTime" property="daoqitime" jdbcType="TIMESTAMP" />
+    <result column="HuiYuanGraden" property="huiyuangraden" jdbcType="VARCHAR" />
+    <result column="YouHui" property="youhui" jdbcType="VARCHAR" />
+    <result column="JiFen" property="jifen" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    KeHuNo, HuiYuanName, HuiYuanNo, HuiYuanMoney, RuHuiTime, DaoQiTime, HuiYuanGraden, 
+    YouHui, JiFen
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.HuiyuanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from huiyuan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.accp.domain.HuiyuanExample" >
+    delete from huiyuan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Huiyuan" >
+    insert into huiyuan (KeHuNo, HuiYuanName, HuiYuanNo, 
+      HuiYuanMoney, RuHuiTime, DaoQiTime, 
+      HuiYuanGraden, YouHui, JiFen
+      )
+    values (#{kehuno,jdbcType=VARCHAR}, #{huiyuanname,jdbcType=VARCHAR}, #{huiyuanno,jdbcType=VARCHAR}, 
+      #{huiyuanmoney,jdbcType=DOUBLE}, #{ruhuitime,jdbcType=TIMESTAMP}, #{daoqitime,jdbcType=TIMESTAMP}, 
+      #{huiyuangraden,jdbcType=VARCHAR}, #{youhui,jdbcType=VARCHAR}, #{jifen,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Huiyuan" >
+    insert into huiyuan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="kehuno != null" >
+        KeHuNo,
+      </if>
+      <if test="huiyuanname != null" >
+        HuiYuanName,
+      </if>
+      <if test="huiyuanno != null" >
+        HuiYuanNo,
+      </if>
+      <if test="huiyuanmoney != null" >
+        HuiYuanMoney,
+      </if>
+      <if test="ruhuitime != null" >
+        RuHuiTime,
+      </if>
+      <if test="daoqitime != null" >
+        DaoQiTime,
+      </if>
+      <if test="huiyuangraden != null" >
+        HuiYuanGraden,
+      </if>
+      <if test="youhui != null" >
+        YouHui,
+      </if>
+      <if test="jifen != null" >
+        JiFen,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="kehuno != null" >
+        #{kehuno,jdbcType=VARCHAR},
+      </if>
+      <if test="huiyuanname != null" >
+        #{huiyuanname,jdbcType=VARCHAR},
+      </if>
+      <if test="huiyuanno != null" >
+        #{huiyuanno,jdbcType=VARCHAR},
+      </if>
+      <if test="huiyuanmoney != null" >
+        #{huiyuanmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="ruhuitime != null" >
+        #{ruhuitime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="daoqitime != null" >
+        #{daoqitime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="huiyuangraden != null" >
+        #{huiyuangraden,jdbcType=VARCHAR},
+      </if>
+      <if test="youhui != null" >
+        #{youhui,jdbcType=VARCHAR},
+      </if>
+      <if test="jifen != null" >
+        #{jifen,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.HuiyuanExample" resultType="java.lang.Integer" >
+    select count(*) from huiyuan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update huiyuan
+    <set >
+      <if test="record.kehuno != null" >
+        KeHuNo = #{record.kehuno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.huiyuanname != null" >
+        HuiYuanName = #{record.huiyuanname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.huiyuanno != null" >
+        HuiYuanNo = #{record.huiyuanno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.huiyuanmoney != null" >
+        HuiYuanMoney = #{record.huiyuanmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ruhuitime != null" >
+        RuHuiTime = #{record.ruhuitime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.daoqitime != null" >
+        DaoQiTime = #{record.daoqitime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.huiyuangraden != null" >
+        HuiYuanGraden = #{record.huiyuangraden,jdbcType=VARCHAR},
+      </if>
+      <if test="record.youhui != null" >
+        YouHui = #{record.youhui,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jifen != null" >
+        JiFen = #{record.jifen,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update huiyuan
+    set KeHuNo = #{record.kehuno,jdbcType=VARCHAR},
+      HuiYuanName = #{record.huiyuanname,jdbcType=VARCHAR},
+      HuiYuanNo = #{record.huiyuanno,jdbcType=VARCHAR},
+      HuiYuanMoney = #{record.huiyuanmoney,jdbcType=DOUBLE},
+      RuHuiTime = #{record.ruhuitime,jdbcType=TIMESTAMP},
+      DaoQiTime = #{record.daoqitime,jdbcType=TIMESTAMP},
+      HuiYuanGraden = #{record.huiyuangraden,jdbcType=VARCHAR},
+      YouHui = #{record.youhui,jdbcType=VARCHAR},
+      JiFen = #{record.jifen,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
